@@ -1,8 +1,8 @@
 import express from "express";
-import axios from "axios";
-import { getAllPokemons } from "../controllers/allPokemonController.js";
-
+import { allPokemons, pokemonById } from "../controllers/pokemonController.js";
 const pokemonRouter = express.Router();
-pokemonRouter.get("/", getAllPokemons);
+
+pokemonRouter.get("/", allPokemons);
+pokemonRouter.get("/:id", pokemonById);
 
 export default pokemonRouter;
