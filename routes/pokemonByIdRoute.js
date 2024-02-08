@@ -4,8 +4,7 @@ import axios from "axios";
 const pokemonByIdRouter = express.Router();
 
 pokemonByIdRouter.get("/:id", async (req, res) => {
-    const {id} = req.params;
-    console.log({id})
+    const id = req.params;
 
     try { 
       const pokemons = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
