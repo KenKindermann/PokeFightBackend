@@ -18,11 +18,21 @@ export const fetchAllPokemonDetails = async (req, res) => {
       axios.get(pokemon.url).then((response) => response.data)
     );
 
-    // Resolve all promises to get details for each Pokémon
     const detailedPokemons = await Promise.all(detailPromises);
 
+    const data = detailedPokemons.map((pokemon) => {
+      return {
+        id: pokemon.id,
+        name: pokemon.name,
+        image: pokemon.sprites.front_default,
+        hp: pokemon.stats[0].base_stat,
+        attack: pokemon.stats[1].base_stat,
+        defense: pokemon.stats[2].base_stat,
+      };
+    });
+
     // Send detailed information back to the client
-    res.json({ count: detailedPokemons.length, pokemons: detailedPokemons });
+    res.json(data);
   } catch (error) {
     console.error("Failed to fetch Pokémon details", error);
     res.status(500).send("Error fetching Pokémon details");
