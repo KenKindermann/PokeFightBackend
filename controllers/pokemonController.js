@@ -1,5 +1,7 @@
 import axios from "axios";
 
+let leaderboard = {};
+
 // Controller to fetch detailed information for all Pokémon
 export const fetchAllPokemonDetails = async (req, res) => {
   // Extracting offset and limit from the request query parameters
@@ -58,3 +60,19 @@ export const pokemonById = async (req, res) => {
     res.status(500).send("Error fetching Pokémon data");
   }
 };
+
+export const updateLeaderboard = async (req, res) => {
+  const { winner, loser } = req.body;
+
+  if (!leaderboard[winner]) {
+    leaderboard[winner] = 0;
+  } else {
+    leaderboard[winner]++;
+  }
+
+  res.json({ message: "Leaderboard updated successfully" });
+};
+
+export const getLeaderboard = async (req,res) => {
+  res.json(leaderboard)
+}
