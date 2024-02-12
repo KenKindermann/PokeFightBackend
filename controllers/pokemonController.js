@@ -26,7 +26,7 @@ export const fetchAllPokemonDetails = async (req, res) => {
       return {
         id: pokemon.id,
         name: pokemon.name,
-        image: pokemon.sprites.front_default,
+        image: pokemon.sprites.other.dream_world.front_default,
         hp: pokemon.stats[0].base_stat,
         attack: pokemon.stats[1].base_stat,
         defense: pokemon.stats[2].base_stat,
@@ -73,6 +73,6 @@ export const updateLeaderboard = async (req, res) => {
   res.json({ message: "Leaderboard updated successfully" });
 };
 
-export const getLeaderboard = async (req,res) => {
-  res.json(leaderboard)
-}
+export const getLeaderboard = async (req, res) => {
+  res.json(leaderboard);
+};
