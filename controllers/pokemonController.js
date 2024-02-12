@@ -72,3 +72,7 @@ export const updateLeaderboard = async (req, res) => {
 
   res.json({ message: "Leaderboard updated successfully" });
 };
+
+export const getLeaderboard = async (req,res) => {
+  res.json(leaderboard)
+}
