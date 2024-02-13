@@ -1,6 +1,5 @@
 import axios from "axios";
-
-let leaderboard = {};
+import Pokemon from "../models/leaderboard.js";
 
 // Controller to fetch detailed information for all Pokémon
 export const fetchAllPokemonDetails = async (req, res) => {
@@ -63,18 +62,43 @@ export const pokemonById = async (req, res) => {
   }
 };
 
-export const updateLeaderboard = async (req, res) => {
-  const { winner, loser } = req.body;
+export const updatePokemonScore = async (req,res) => {
+  const { pokemonId } = req.body;
 
-  if (!leaderboard[winner]) {
-    leaderboard[winner] = 0;
-  } else {
-    leaderboard[winner]++;
+  try {
+    const pokemon = await Pokemon.findById(pokemonId);
+    pokemon.score += 1;
+    await pokemon.save();
+    res.json({ message: 'Pokemon score updated successfully' });
+  } catch (error) {
+    console.error('Error updating Pokemon score', error);
+    res.status(500).send('Error updating Pokemon score');
   }
-
-  res.json({ message: "Leaderboard updated successfully" });
 };
 
 export const getLeaderboard = async (req, res) => {
-  res.json(leaderboard);
+  try {
+    const leaderboardData = await Pokemon.find().sort({ score: -1 });
+
+    res.json(leaderboardData);
+  } catch (error) {
+    console.error('Error fetching leaderboard data', error);
+    res.status(500).send('Error fetching leaderboard data');
+  }
 };
+
+// export const updateLeaderboard = async (req, res) => {
+//   const { winner, loser } = req.body;
+
+//   if (!leaderboard[winner]) {
+//     leaderboard[winner] = 0;
+//   } else {
+//     leaderboard[winner]++;
+//   }
+
+//   res.json({ message: "Leaderboard updated successfully" });
+// };
+
+// export const getLeaderboard = async (req, res) => {
+//   res.json(leaderboard);
+// };
