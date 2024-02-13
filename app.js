@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use("/pokemon", pokemonRouter);
 app.use("/:id", pokemonRouter);
-app.use("/updateLeaderboard", pokemonRouter);
+app.post('/game/update-score', pokemonRouter);
+app.get('/game/leaderboard', pokemonRouter)
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
