@@ -30,7 +30,7 @@ export const fetchAllPokemonDetails = async (req, res) => {
         attack: pokemon.stats[1].base_stat,
         defense: pokemon.stats[2].base_stat,
         type: pokemon.types[0].type.name,
-        speed: pokemon.stats[5].base_stat.name,
+        speed: pokemon.stats[5].base_stat,
       };
     });
 
