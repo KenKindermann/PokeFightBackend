@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/pokemon", pokemonRouter);
 app.use("/:id", pokemonRouter);
-app.post('/game/update-score', pokemonRouter);
+app.post('/game/save', pokemonRouter);
 app.get('/game/leaderboard', pokemonRouter)
 
 app.listen(PORT, () => {
