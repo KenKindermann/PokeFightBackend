@@ -62,20 +62,6 @@ export const pokemonById = async (req, res) => {
   }
 };
 
-export const updatePokemonScore = async (req, res) => {
-  const { pokemonId } = req.body;
-
-  try {
-    const pokemon = await Pokemon.findById(pokemonId);
-    pokemon.score += 1;
-    await pokemon.save();
-    res.json({ message: "Pokemon score updated successfully" });
-  } catch (error) {
-    console.error("Error updating Pokemon score", error);
-    res.status(500).send("Error updating Pokemon score");
-  }
-};
-
 export const getLeaderboard = async (req, res) => {
   try {
     const leaderboardData = await Pokemon.find().sort({ score: -1 }).limit(10);
@@ -86,19 +72,3 @@ export const getLeaderboard = async (req, res) => {
     res.status(500).send("Error fetching leaderboard data");
   }
 };
-
-// export const updateLeaderboard = async (req, res) => {
-//   const { winner, loser } = req.body;
-
-//   if (!leaderboard[winner]) {
-//     leaderboard[winner] = 0;
-//   } else {
-//     leaderboard[winner]++;
-//   }
-
-//   res.json({ message: "Leaderboard updated successfully" });
-// };
-
-// export const getLeaderboard = async (req, res) => {
-//   res.json(leaderboard);
-// };
