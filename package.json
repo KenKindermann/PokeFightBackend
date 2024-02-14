@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --require dotenv/config app.js"
+    "start": "nodemon --require dotenv/config app.js",
+    "initDB": "node --require dotenv/config scripts/initialPopulate.js"
   },
   "keywords": [],
   "author": "",
