@@ -12,9 +12,8 @@ export const updatePokemonScore = async (req, res) => {
     loser.losses += 1;
     await loser.save();
 
-    res.status(201).send("Error updating Pokemon score");
+    res.status(201).send("Successfully updated scores!");
   } catch (error) {
-    console.error("Error updating Pokemon score", error);
-    res.status(500).send("Error updating Pokemon score");
+    res.status(500).send(error.message);
   }
 };
