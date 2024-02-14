@@ -14,7 +14,6 @@ export const updatePokemonScore = async (req, res) => {
 
     res.status(201).send("Nice, it works!");
   } catch (error) {
-    console.error("Error updating Pokemon score", error);
-    res.status(500).send("Error updating Pokemon score");
+    res.status(500).send(error.message);
   }
 };

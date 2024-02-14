@@ -64,11 +64,11 @@ export const pokemonById = async (req, res) => {
 
 export const getLeaderboard = async (req, res) => {
   try {
-    const leaderboardData = await Pokemon.find().sort({ score: -1 });
+    const leaderboardData = await Pokemon.find().sort({ score: -1 }).limit(10);
 
     res.json(leaderboardData);
   } catch (error) {
-    console.error('Error fetching leaderboard data', error);
-    res.status(500).send('Error fetching leaderboard data');
+    console.error("Error fetching leaderboard data", error);
+    res.status(500).send("Error fetching leaderboard data");
   }
 };
