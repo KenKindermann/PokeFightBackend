@@ -4,15 +4,15 @@ export const updatePokemonScore = async (req, res) => {
   const { winnerId, loserId } = req.body;
 
   try {
-    const winner = await Pokemon.findById(winnerId);
+    const winner = await Pokemon.findOne({ id: winnerId });
     winner.wins += 1;
     await winner.save();
 
-    const loser = await Pokemon.findById(loserId);
+    const loser = await Pokemon.findOne({ id: loserId });
     loser.losses += 1;
     await loser.save();
 
-    res.status(201).send("Error updating Pokemon score");
+    res.status(201).send("Nice, it works!");
   } catch (error) {
     console.error("Error updating Pokemon score", error);
     res.status(500).send("Error updating Pokemon score");
