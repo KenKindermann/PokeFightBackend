@@ -16,4 +16,6 @@ const pokemonSchema = new mongoose.Schema({
   },
 });
 
+pokemonSchema.index({ id: 1 });
+
 export default mongoose.model("Pokemon", pokemonSchema);

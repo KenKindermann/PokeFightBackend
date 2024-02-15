@@ -4,13 +4,19 @@ export const updatePokemonScore = async (req, res) => {
   const { winnerId, loserId } = req.body;
 
   try {
-    const winner = await Pokemon.findOne({ id: winnerId });
-    winner.wins += 1;
-    await winner.save();
+    const [winner, loser] = await Promise.all([
+      Pokemon.findOne({ id: winnerId }),
+      Pokemon.findOne({ id: loserId })
+    ]);
 
-    const loser = await Pokemon.findOne({ id: loserId });
+    if (!winner || !loser) {
+      return res.status(404).send("Winner or loser not found");
+    }
+
+    winner.wins += 1;
     loser.losses += 1;
-    await loser.save();
+
+    await Promise.all([winner.save(), loser.save()]);
 
     res.status(201).send("Nice, it works!");
   } catch (error) {
